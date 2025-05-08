@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import CsvUploader from '../components/CsvUploader';
+import FileUploader from '../components/FileUploader';
 import QueryInput from '../components/QueryInput';
 import ChartComponent from '../components/ChartComponent';
 import DataSummary from '../components/DataSummary';
@@ -199,7 +199,7 @@ export default function Home() {
                         <h2 className="text-lg font-semibold text-gray-900">One Visual, Many Insights.</h2>
                       </div>
                     </div>
-                    <CsvUploader onDataLoaded={handleDataLoaded} />
+                    <FileUploader onDataLoaded={handleDataLoaded} />
                   </div>
                 </div>
               </div>

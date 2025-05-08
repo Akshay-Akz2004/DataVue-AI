@@ -1,27 +1,54 @@
 import { ChangeEvent, useState } from 'react';
 import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
 
-interface CsvUploaderProps {
+interface FileUploaderProps {
   onDataLoaded: (data: any[], headers: string[]) => void;
 }
 
-const CsvUploader = ({ onDataLoaded }: CsvUploaderProps) => {
+const FileUploader = ({ onDataLoaded }: FileUploaderProps) => {
   const [fileName, setFileName] = useState<string>('');
   const [isDragging, setIsDragging] = useState(false);
+
+  const processExcelFile = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const data = e.target?.result;
+      const workbook = XLSX.read(data, { type: 'binary' });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+      
+      if (jsonData.length > 0) {
+        const headers = jsonData[0] as string[];
+        const data = jsonData.slice(1) as any[];
+        onDataLoaded(data, headers);
+      }
+    };
+    reader.readAsBinaryString(file);
+  };
+
+  const processCsvFile = (file: File) => {
+    Papa.parse(file, {
+      complete: (results) => {
+        const headers = results.data[0] as string[];
+        const data = results.data.slice(1) as any[];
+        onDataLoaded(data, headers);
+      },
+      header: false,
+      skipEmptyLines: true,
+    });
+  };
 
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setFileName(file.name);
-      Papa.parse(file, {
-        complete: (results) => {
-          const headers = results.data[0] as string[];
-          const data = results.data.slice(1) as any[];
-          onDataLoaded(data, headers);
-        },
-        header: false,
-        skipEmptyLines: true,
-      });
+      if (file.name.endsWith('.csv')) {
+        processCsvFile(file);
+      } else if (file.name.match(/\.(xlsx|xls)$/)) {
+        processExcelFile(file);
+      }
     }
   };
 
@@ -40,17 +67,13 @@ const CsvUploader = ({ onDataLoaded }: CsvUploaderProps) => {
     setIsDragging(false);
     
     const file = e.dataTransfer.files?.[0];
-    if (file && file.type === 'text/csv') {
+    if (file) {
       setFileName(file.name);
-      Papa.parse(file, {
-        complete: (results) => {
-          const headers = results.data[0] as string[];
-          const data = results.data.slice(1) as any[];
-          onDataLoaded(data, headers);
-        },
-        header: false,
-        skipEmptyLines: true,
-      });
+      if (file.name.endsWith('.csv')) {
+        processCsvFile(file);
+      } else if (file.name.match(/\.(xlsx|xls)$/)) {
+        processExcelFile(file);
+      }
     }
   };
 
@@ -91,7 +114,7 @@ const CsvUploader = ({ onDataLoaded }: CsvUploaderProps) => {
               <span className="text-blue-600">{fileName}</span>
             ) : (
               <>
-                <span className="font-semibold">Click to upload</span> or drag and drop your CSV file
+                <span className="font-semibold">Click to upload</span> or drag and drop your CSV or Excel file
               </>
             )}
           </p>
@@ -103,7 +126,7 @@ const CsvUploader = ({ onDataLoaded }: CsvUploaderProps) => {
           id="dropzone-file"
           type="file"
           className="hidden"
-          accept=".csv"
+          accept=".csv,.xlsx,.xls"
           onChange={handleFileUpload}
         />
       </label>
@@ -111,4 +134,4 @@ const CsvUploader = ({ onDataLoaded }: CsvUploaderProps) => {
   );
 };
 
-export default CsvUploader; 
+export default FileUploader; 
