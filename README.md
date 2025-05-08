@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Datavue AI - Natural Language Data Visualization
 
-## Getting Started
+Datavue AI is an intelligent data visualization tool that transforms your spreadsheet data into meaningful visualizations using natural language processing. Simply upload your data and ask questions in plain English to create beautiful, insightful charts.
 
-First, run the development server:
+## 🌟 Features
 
+- **Natural Language Processing**: Ask questions about your data in plain English
+- **Multiple Chart Types**: Supports line, bar, scatter, and pie charts
+- **Smart Data Analysis**: Automatic data filtering and aggregation
+- **Interactive Visualizations**: Dynamic and responsive charts
+- **Data Insights**: Get AI-powered insights about your data
+- **User-Friendly Interface**: Clean, modern UI with intuitive controls
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- Groq API key
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/dataviz.git
+cd dataviz
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+4. Start the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 💡 Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Upload Your Data**:
+   - Click the upload button to select your CSV or Excel file
+   - The system will automatically detect headers and data types
 
-## Learn More
+2. **Ask Questions**:
+   - Type your question in natural language
+   - Example queries:
+     - "Show total sales by region as a bar chart"
+     - "Create a line chart of monthly revenue trends"
+     - "Display a pie chart of customer distribution by country"
 
-To learn more about Next.js, take a look at the following resources:
+3. **View Results**:
+   - The system will generate the appropriate visualization
+   - Get AI-powered insights about your data
+   - Interact with the charts to explore your data further
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Built With
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Next.js](https://nextjs.org/) - React framework
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Chart.js](https://www.chartjs.org/) - Charting library
+- [Groq AI](https://groq.com/) - Natural language processing
+- [Recharts](https://recharts.org/) - Additional charting capabilities
 
-## Deploy on Vercel
+## 📦 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+dataviz/
+├── app/                 # Next.js app directory
+├── components/          # React components
+├── utils/              # Utility functions
+├── public/             # Static assets
+└── ...config files
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Thanks to the Groq AI team for their powerful language model
+- Inspired by the need for more accessible data visualization tools
+- Built with the amazing Next.js and React communities
+
+
